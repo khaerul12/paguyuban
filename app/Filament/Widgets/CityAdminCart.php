@@ -37,6 +37,7 @@ class CityAdminCart extends ChartWidget
         $count = array();
         foreach ($cities as $city) {
             array_push($count, $city->count);
+//            dd($city);
         }
         return $count;
     }
@@ -46,7 +47,12 @@ class CityAdminCart extends ChartWidget
         $cities = City::take(10)->orderBy('count', 'desc')->get();
         $label = array();
         foreach ($cities as $city) {
-            array_push($label, $city->name);
+            $city = explode(" ",$city->name);
+            $name = '';
+            for ($i = 1; $i < count($city); $i++) {
+                $name .= ' '.$city[$i];
+            }
+            array_push($label, $name);
         }
         return $label;
     }

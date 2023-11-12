@@ -7,7 +7,7 @@ use Filament\Widgets\ChartWidget;
 
 class GenderAdminCart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Gender';
     protected static ?string $maxHeight = '275px';
 
 
