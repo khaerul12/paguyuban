@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Storage;
 class HomeController extends Controller
 {
     public function index(){
-        return view('welcome');
+        return view('home');
+    }
+
+    public function detail($id){
+
+         return view('detail',[
+             'biodata' => Biodata::find($id)
+         ]);
     }
 
     public function province(){
