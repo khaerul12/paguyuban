@@ -59,6 +59,13 @@
         @apply bg-yellow !important
     }
 
+    .fi-modal-window{
+        @apply bg-[#fff]
+    }
+
+    .fi-modal-footer-actions .fi-btn {
+        @apply last:text-gray-300
+    }
 
 
 
