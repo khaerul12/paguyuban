@@ -12,6 +12,7 @@ class Biodata extends Model
 
     protected $fillable = [
         'image',
+        'nik',
         'full_name',
         'birth_date',
         'gender',

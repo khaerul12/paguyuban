@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('full_name');
+            $table->bigInteger('nik');
             $table->date('birth_date');
             $table->string('gender');
             $table->string('blood');

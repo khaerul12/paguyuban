@@ -24,7 +24,10 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Ramsey\Uuid\Type\Integer;
 
 class BiodataResource extends Resource
@@ -32,7 +35,7 @@ class BiodataResource extends Resource
     protected static ?string $model = Biodata::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationLabel= "Anggota";
+    protected static ?string $navigationLabel = "Anggota";
 
     protected static ?string $pluralModelLabel = 'Daftar Anggota';
     protected static ?string $label = 'Anggota';
@@ -44,41 +47,42 @@ class BiodataResource extends Resource
     {
         return $form
             ->schema([
-               Section::make('Data Pribadi')->schema([
-                   Section::make()->schema([
-                       TextInput::make('full_name')->name('Nama Lengkap')->required(),
-                       Forms\Components\Grid::make(2)->schema([
-                           Select::make('gender')->name('Jenis Kelamin')->required()
-                               ->options([
-                                   'laki-laki' => 'Laki-Laki',
-                                   'perempuan' => 'Perempuan',
-                               ])->native(false),
-                           TextInput::make('blood')->name('Golongan Darah')->required(),
-                       ]),
-                       Select::make('religion')->name('Agama')->required()
-                           ->options([
-                               'islam' => 'Islam',
-                               'protestan' => 'Protestan',
-                               'katolik' => 'Katolik',
-                               'buddha' => 'Buddha',
-                               'khonghucu' => 'Khonghucu',
-                           ])->native(false),
-                       Select::make('status')->name('Status Pernikahan')->required()
-                           ->options([
-                               'balum kawain' => 'Belum Kawin',
-                               'kawin' => 'Kawin'
-                           ])->native(false),
-                       TextInput::make('profession')->name('Pekerjaan')->required(),
-                   ])->columnSpan(8),
-                   Section::make()->schema([
-                       FileUpload::make('image')
-                           ->image()->name('Upload Foto Kamu')->required(),
-                       DatePicker::make('birth_date')
-                           ->displayFormat('d-F-Y')
-                           ->native(false)
-                           ->required(),
-                   ])->columnSpan(4),
-               ])->columns(12),
+                Section::make('Data Pribadi')->schema([
+                    Section::make()->schema([
+                        TextInput::make('nik')->label('NIK')->numeric()->required(),
+                        TextInput::make('full_name')->name('Nama Lengkap')->required(),
+                        Forms\Components\Grid::make(2)->schema([
+                            Select::make('gender')->name('Jenis Kelamin')->required()
+                                ->options([
+                                    'laki-laki' => 'Laki-Laki',
+                                    'perempuan' => 'Perempuan',
+                                ])->native(false),
+                            TextInput::make('blood')->name('Golongan Darah')->required(),
+                        ]),
+                        Select::make('religion')->name('Agama')->required()
+                            ->options([
+                                'islam' => 'Islam',
+                                'protestan' => 'Protestan',
+                                'katolik' => 'Katolik',
+                                'buddha' => 'Buddha',
+                                'khonghucu' => 'Khonghucu',
+                            ])->native(false),
+                        Select::make('status')->name('Status Pernikahan')->required()
+                            ->options([
+                                'balum kawain' => 'Belum Kawin',
+                                'kawin' => 'Kawin'
+                            ])->native(false),
+                        TextInput::make('profession')->name('Pekerjaan')->required(),
+                    ])->columnSpan(8),
+                    Section::make()->schema([
+                        FileUpload::make('image')
+                            ->image()->name('Upload Foto Kamu')->required(),
+                        DatePicker::make('birth_date')
+                            ->displayFormat('d-F-Y')
+                            ->native(false)
+                            ->required(),
+                    ])->columnSpan(4),
+                ])->columns(12),
 
 
                 Section::make('Alamat Tempat Tinggal')->relationship('address')
@@ -86,24 +90,24 @@ class BiodataResource extends Resource
                         TextInput::make('street')->required(),
                         Forms\Components\Grid::make(2)->schema([
                             Select::make('city_id')
-                                ->relationship('city','name')
+                                ->relationship('city', 'name')
                                 ->searchable()
                                 ->required(),
                             Select::make('province_id')
-                                ->relationship('province','name')
+                                ->relationship('province', 'name')
                                 ->searchable()
                                 ->required(),
                         ]),
                         TextInput::make('sub_district')->required(),
                         TextInput::make('regency')->required(),
-                ]),
+                    ]),
 
                 Section::make('Pendidikan')->relationship('education')
                     ->schema([
-                        TextInput::make('sd'),
-                        TextInput::make('smp'),
-                        TextInput::make('smk'),
-                        TextInput::make('college'),
+                        TextInput::make('sd')->label('SD'),
+                        TextInput::make('smp')->label('SMP'),
+                        TextInput::make('smk')->label('SMK'),
+                        TextInput::make('college')->label('Kuliah'),
                     ]),
 
                 Section::make('Kontak Person')->schema([
@@ -121,6 +125,8 @@ class BiodataResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Foto'),
+                Tables\Columns\TextColumn::make('nik')->label('NIK')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('full_name')->label('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('birth_date')->label('Tanggal Lahir')
@@ -138,13 +144,38 @@ class BiodataResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                DeleteAction::make()->before(function ($record){
+                DeleteAction::make()->before(function ($record) {
                     self::beforDelete($record);
                 })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    ExportBulkAction::make(),
+                   ExportBulkAction::make()->exports([
+                       ExcelExport::make()->withColumns([
+                           Column::make('nik')->heading('NIK'),
+                           Column::make('full_name')->heading('Nama'),
+                           Column::make('image')->heading('Foto'),
+                           Column::make('birth_date')->heading('Tanggal Lahir'),
+                           Column::make('gender')->heading('Jenis Kelamin'),
+                           Column::make('blood')->heading('Golongan Darah'),
+                           Column::make('religion')->heading('Agama'),
+                           Column::make('status')->heading('Status'),
+                           Column::make('profession')->heading('Profesi'),
+                           Column::make('numbers')->heading('Nomor HP'),
+                           Column::make('email')->heading('Email'),
+                           Column::make('facebook')->heading('Facebook'),
+                           Column::make('instagram')->heading('Instagram'),
+                           Column::make('twitter')->heading('Twitter'),
+                           Column::make('address.street')->heading('Alamat'),
+                           Column::make('address.city.name')->heading('Kota'),
+                           Column::make('address.province.name')->heading('Provinsi'),
+                           Column::make('address.sub_district')->heading('Kecamatan'),
+                           Column::make('education.sd')->heading('SD'),
+                           Column::make('education.smp')->heading('SMP'),
+                           Column::make('education.sma')->heading('SMA'),
+                           Column::make('education.college')->heading('Kuliah'),
+                       ]),
+                   ]),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
@@ -162,11 +193,9 @@ class BiodataResource extends Resource
     }
 
 
-
-
     public static function beforDelete($record): void
     {
-        $address = Address::where('biodata_id',$record->id)->get();
+        $address = Address::where('biodata_id', $record->id)->get();
         $city = City::find($address[0]['city_id']);
         $city->count = $city->count - 1;
         $city->update();
@@ -177,6 +206,8 @@ class BiodataResource extends Resource
 //        dd($address);
     }
 
+
+
     public static function getPages(): array
     {
         return [
@@ -185,4 +216,6 @@ class BiodataResource extends Resource
             'edit' => Pages\EditBiodata::route('/{record}/edit'),
         ];
     }
+
+
 }
