@@ -13,6 +13,7 @@ class Biodata extends Model
     protected $fillable = [
         'image',
         'nik',
+        'kk',
         'full_name',
         'birth_date',
         'gender',
@@ -20,11 +21,14 @@ class Biodata extends Model
         'religion',
         'status',
         'profession',
+        'note',
+        'condition',
         'numbers',
         'email',
         'facebook',
         'instagram',
-        'twitter'
+        'twitter',
+        'head_kk'
     ];
 
     public function address(): HasOne
@@ -36,4 +40,14 @@ class Biodata extends Model
     {
         return $this->hasOne(Education::class);
     }
+
+    // public function parent()
+    // {
+    //     return $this->belongsTo(self::class, "anggota_id");
+    // }
+
+    // public function child()
+    // {
+    //     return $this->hasMany(self::class, "anggota_id");
+    // }
 }

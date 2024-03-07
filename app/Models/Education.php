@@ -21,6 +21,6 @@ class Education extends Model
 
     public function biodata(): BelongsTo
     {
-        return $this->belongsTo(Biodata::class,'biodata_id');
+        return $this->belongsTo(Biodata::class, 'biodata_id');
     }
 }

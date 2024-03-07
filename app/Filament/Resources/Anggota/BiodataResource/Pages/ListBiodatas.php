@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\BiodataResource\Pages;
+namespace App\Filament\Resources\Anggota\BiodataResource\Pages;
 
-use App\Filament\Resources\BiodataResource;
+use App\Filament\Resources\Anggota\BiodataResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-
-use function Livewire\after;
 
 class ListBiodatas extends ListRecords
 {
@@ -17,12 +16,12 @@ class ListBiodatas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Tambah Kepala Keluarga'),
+            Actions\CreateAction::make()->label('Tambah Anggota Keluarga'),
         ];
     }
 
     protected function getTableQuery(): Builder
     {
-        return parent::getTableQuery()->whereNull('head_kk');
+        return parent::getTableQuery()->whereNotNull('head_kk');
     }
 }

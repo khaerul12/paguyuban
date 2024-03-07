@@ -13,20 +13,24 @@ return new class extends Migration
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('kk');
             $table->string('image')->nullable();
             $table->string('full_name');
-            $table->bigInteger('nik');
+            $table->bigInteger('nik')->unique();
             $table->date('birth_date');
             $table->string('gender');
             $table->string('blood');
-            $table->string('religion');
-            $table->string('status');
-            $table->string('profession');
+            $table->string('religion')->nullable();
+            $table->string('status')->nullable();
+            $table->string('profession')->nullable();
+            $table->string('note')->nullable();
+            $table->enum('condition', ['Sejahtera', 'Pra Sejahtera'])->nullable();
             $table->string('numbers')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
+            $table->bigInteger('head_kk')->nullable();
             $table->timestamps();
         });
     }

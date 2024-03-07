@@ -23,16 +23,15 @@ class Address extends Model
 
     public function biodata(): BelongsTo
     {
-        return $this->belongsTo(Biodata::class,'biodata_id');
+        return $this->belongsTo(Biodata::class, 'biodata_id');
     }
 
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class,'city_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class, 'province_id');
     }
-
 }
