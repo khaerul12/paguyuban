@@ -33,9 +33,12 @@ class ListAssetCustom extends Page implements HasTable
 
     protected function getViewData(): array
     {
+        $debit = Assets::where('payment', 'Debit')->sum('amount');
+        $kredit = Assets::where('payment', 'Kredit')->sum('amount');
 
+        $total = $kredit - $debit;
         return [
-            'total' => number_format(Assets::sum('amount'), 2, ',', '.')
+            'total' => number_format($total, 2, ',', '.')
         ];
     }
 

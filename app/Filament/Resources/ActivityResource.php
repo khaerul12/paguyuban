@@ -10,6 +10,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -43,7 +44,10 @@ class ActivityResource extends Resource
                 Section::make('Add dan Edit Posting Kegiatan')->schema([
                     Section::make()->schema([
                         TextInput::make('title')->label('Judul Kegiatan')->required(),
-                        RichEditor::make('body')->label('Isi Konten')->required(),
+                        Textarea::make('body')->label('Isi Konten')->required()
+                            ->rows(6)
+                            ->cols(10),
+
                     ])->columnSpan(8),
                     Section::make()->schema([
                         FileUpload::make('image')->label('Upload Foto')->required(),
