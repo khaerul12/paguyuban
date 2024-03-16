@@ -19,4 +19,4 @@ class BiodataStatsWidget extends BaseWidget
             Stat::make('Gak tau mau isi apaa', '1000'),
         ];
     }
-}
+} 
