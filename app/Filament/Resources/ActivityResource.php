@@ -37,7 +37,7 @@ class ActivityResource extends Resource
     protected static ?string $slug = 'daftar-kegiatan';
 
     public static function form(Form $form): Form
-    {
+    { 
         return $form
             ->schema([
                 Section::make('Add dan Edit Posting Kegiatan')->schema([

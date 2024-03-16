@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+{{-- <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class=" flex flex-wrap items-center justify-between mx-[3%] p-4 ">
         <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('/images/logo.svg') }}" alt="logo" class="h-10">
@@ -51,4 +51,32 @@
             </div>
         </div>
     </div>
-</nav>
+</nav> --}}
+<header class="bg-white shadow-md">
+    <nav class="flex justify-between items-center">
+        <div class="py-6">
+            <ul class="flex items-center gap-[2vw] font-bold">
+                <li class="ml-10">
+                    <img class="w-10" src="storage/python.png" alt="">
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="">
+            <ul class="flex gap-[2vw] font-bold items-center">
+                <li class="hover:text-green-600">
+                    <a href="#dashboard">Dashboard</a>
+                </li>
+                <li class="hover:text-green-600">
+                    <a href="#kegiatan">Kegiatan</a>
+                </li>
+                <li class="hover:text-green-600">
+                    <a href="#saldo" class="mr-10">Saldo</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+</header>
