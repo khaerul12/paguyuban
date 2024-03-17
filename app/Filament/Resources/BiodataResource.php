@@ -61,7 +61,7 @@ class BiodataResource extends Resource
                                     'laki-laki' => 'Laki-Laki',
                                     'perempuan' => 'Perempuan',
                                 ])->native(false),
-                            TextInput::make('blood')->name('Golongan Darah')->required(),
+                            TextInput::make('blood')->name('Golongan Darah'),
                         ]),
                         Select::make('religion')->name('Agama')->required()
                             ->options([
@@ -77,7 +77,7 @@ class BiodataResource extends Resource
                                 'kawin' => 'Kawin'
                             ])->native(false),
                         TextInput::make('profession')->name('Pekerjaan')->required(),
-                        Textarea::make('note')->name('Catatan')->required(),
+                        Textarea::make('note')->name('Catatan'),
                     ])->columnSpan(8),
                     Section::make()->schema([
                         FileUpload::make('image')

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('nik')->unique();
             $table->date('birth_date');
             $table->string('gender');
-            $table->string('blood');
+            $table->string('blood')->nullable();
             $table->string('religion')->nullable();
             $table->string('status')->nullable();
             $table->string('profession')->nullable();
