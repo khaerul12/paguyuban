@@ -31,6 +31,7 @@ class HomeController extends Controller
 
         $total = $kredit - $debit;
 
+
         // $laki = Biodata::where('gender','laki-laki')->count();
         // $perempuan = Biodata::where('gender','perempuan')->count();
         return view('landingpage', [
@@ -42,6 +43,10 @@ class HomeController extends Controller
             'cashflow' => Assets::get(),
             'totalsaldo' => number_format($total, 2, ',', '.'),
             'totalkk' => Biodata::where('head_kk','=',null) -> count(),
+            'genderlaki' => Biodata::where('gender', '=', 'laki-laki') -> count(),
+            'genderperempuan' => Biodata::where('gender', '=', 'perempuan') -> count(),
+            // 'gender' => Biodata::where('gender','=','perempuan','or','laki-laki') -> count()
+            
             // 'gender' => Biodata::select('gender')->get()
             
         ]);

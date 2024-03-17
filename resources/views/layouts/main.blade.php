@@ -10,11 +10,22 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
     <script>
         tailwind.config = {
           theme: {
-            extend: {},
+            extend: {
+              fontFamily: {
+                poppins: ["Poppins", "sans-serif"],
+                }
+            },
             screens: {
       'sm': '300px',
       // => @media (min-width: 640px) { ... }
@@ -36,7 +47,7 @@
       </script>
 
 </head>
-<body class="antialiased">
+<body class="antialiased font-poppins">
 <!-- Navbar -->
 @include('layouts.partials.navbar')
 <!-- Navbar -->

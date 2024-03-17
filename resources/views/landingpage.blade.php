@@ -3,25 +3,25 @@
     <!-- Section Dashboard -->
     <section id="dashboard" class="2xl:my-24 xl:my-24 sm:my-14">
         <div class="2xl:px-28 xl:px-28 sm:px-10">
-            <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:flex sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal ">Dashboard</h1>
-            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl"><a href="{{ route('home') }}">View All</a></h1>
+            <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:inline-block sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal ">Dashboard</h1>
+            <h1 class="2xl:text-lg xl:text-lg items-end 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:float-right sm:inline-block sm:text-sm hover:text-green-600 underline" ><a href="{{ route('home') }}">View All</a></h1>
 
-            <div class="2xl:grid xl:grid lg:grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-4 gap-4 my-10 sm:items-center">
-                <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
-                    <div class="text-2xl">Total data anggota</div>
-                    <div>{{ $anggota }}</div>
+            <div class="2xl:grid xl:grid lg:grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-4 gap-4 my-10 sm:items-center text-center">
+                <div class="grid grid-rows-2 grid-flow-col gap-4 2xl:shadow-xl xl:shadow-xl sm:shadow-md p-4 rounded-xl">
+                    <div class="text-xl">Total data anggota</div>
+                    <div class="font-bold">{{ $anggota }}</div>
                 </div>
-                <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
-                    <div class="text-2xl">Total Kota</div>
-                    <div>{{ $kota }}</div>
+                <div class="grid grid-rows-2 grid-flow-col gap-4 2xl:shadow-xl xl:shadow-xl sm:shadow-md p-4 rounded-xl">
+                    <div class="text-xl">Total Kota</div>
+                    <div class="font-bold">{{ $kota }}</div>
                 </div>
-                <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
-                    <div class="text-2xl">Total Provinsi</div>
-                    <div>{{ $provinsi }}</div>
+                <div class="grid grid-rows-2 grid-flow-col gap-4 2xl:shadow-xl xl:shadow-xl sm:shadow-md p-4 rounded-xl">
+                    <div class="text-xl">Total Provinsi</div>
+                    <div class="font-bold">{{ $provinsi }}</div>
                 </div>
-                <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
-                    <div class="text-2xl">Total KK</div>
-                    <div>{{ $totalkk }}</div>
+                <div class="grid grid-rows-2 grid-flow-col gap-4 2xl:shadow-xl xl:shadow-xl sm:shadow-md p-4 rounded-xl">
+                    <div class="text-xl">Total KK</div>
+                    <div class="font-bold">{{ $totalkk }}</div>
                 </div>
             </div>
 
@@ -113,10 +113,10 @@
     <!-- Section Kegiatan -->
     <section id="kegiatan" class="2xl:my-24 xl:my-24 sm:my-14">
         <div class="2xl:px-28 xl:px-28 sm:px-10">
-            <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:flex sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal">
+            <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:inline-block sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal">
                 Kegiatan
             </h1>
-            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl"><a href="{{ route('allActivity') }}">View All</a></h1>
+            <h1 class="2xl:text-lg xl:text-lg items-end 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:float-right sm:inline-block sm:text-sm hover:text-green-600 underline"><a href="{{ route('allActivity') }}">View All</a></h1>
 
             
             <div class="2xl:flex xl:flex md:flex 2xl:justify-center xl:justify-center 2xl:gap-7 xl:gap-7 md:gap-3">
@@ -164,7 +164,7 @@
 
 
     <!-- Section Keuangan -->
-    <section id="saldo" class="my-24">
+    <section id="saldo" class="my-24 sm:pb-60">
         <div class="2xl:px-28 xl:px-28 sm:px-10">
             <h1 class="2xl:text-7xl xl:text-7xl sm:text-5xl justify-center flex">{{ $totalsaldo }}</h1>
             <h2 class="text-5xl justify-center flex mt-4">Saldo</h2>
@@ -207,10 +207,10 @@
   new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['Pria', 'Wanita'],
       datasets: [{
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [`{{ $genderlaki }} `, `{{ $genderperempuan }}`],
         borderWidth: 1
       }]
     },
