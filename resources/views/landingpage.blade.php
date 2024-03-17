@@ -4,24 +4,24 @@
     <section id="dashboard" class="2xl:my-24 xl:my-24 sm:my-14">
         <div class="2xl:px-28 xl:px-28 sm:px-10">
             <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:flex sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal ">Dashboard</h1>
-            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl">View All</h1>
+            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl"><a href="{{ route('home') }}">View All</a></h1>
 
             <div class="2xl:grid xl:grid lg:grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-4 gap-4 my-10 sm:items-center">
                 <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
                     <div class="text-2xl">Total data anggota</div>
-                    <div>09</div>
+                    <div>{{ $anggota }}</div>
                 </div>
                 <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
                     <div class="text-2xl">Total Kota</div>
-                    <div>09</div>
+                    <div>{{ $kota }}</div>
                 </div>
                 <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
                     <div class="text-2xl">Total Provinsi</div>
-                    <div>09</div>
+                    <div>{{ $provinsi }}</div>
                 </div>
                 <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
                     <div class="text-2xl">Total KK</div>
-                    <div>09</div>
+                    <div>{{ $totalkk }}</div>
                 </div>
             </div>
 
@@ -30,39 +30,21 @@
                     <div class="text-2xl ">City</div>
 
                     <div class="mt-3 overflow-auto rounded-lg shadow">
-
+                        
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b-2 border-gray-200 ">
                                 <tr>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Details</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Status</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Total</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Nama Kota</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
+                                @foreach($allkota as $allkota)  
                                 <tr class="bg-white">
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10001</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $allkota -> name}}</td>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $allkota -> count}}</td>
                                 </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10002</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10003</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <!-- <table id="cashflow" class="w-full text-sm bg-gray-400  justify-center shadow-xl text-center">
@@ -117,9 +99,11 @@
                 </div>
                 
 
-                <div class="grid grid-rows-2 grid-flow-col gap-4 shadow-xl p-4 rounded-xl">
+                <div class=" gap-4 shadow-xl p-4 rounded-xl">
                     <div class="text-2xl">Gender</div>
-                    <div>09</div>
+                    <div class="mt-3 overflow-auto rounded-lg shadow">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,7 +116,7 @@
             <h1 class="2xl:text-5xl xl:text-5xl md:text-4xl 2xl:inline-block xl:inline-block sm:flex sm:text-2xl sm:font-bold 2xl:font-normal xl:font-normal lg:font-normal">
                 Kegiatan
             </h1>
-            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl">View All</h1>
+            <h1 class="2xl:text-5xl xl:text-5xl 2xl:inline-block xl:inline-block 2xl:float-right xl:float-right sm:flex sm:text-2xl"><a href="{{ route('allActivity') }}">View All</a></h1>
 
             
             <div class="2xl:flex xl:flex md:flex 2xl:justify-center xl:justify-center 2xl:gap-7 xl:gap-7 md:gap-3">
@@ -182,7 +166,7 @@
     <!-- Section Keuangan -->
     <section id="saldo" class="my-24">
         <div class="2xl:px-28 xl:px-28 sm:px-10">
-            <h1 class="text-7xl justify-center flex">10.000.000</h1>
+            <h1 class="2xl:text-7xl xl:text-7xl sm:text-5xl justify-center flex">{{ $totalsaldo }}</h1>
             <h2 class="text-5xl justify-center flex mt-4">Saldo</h2>
 
             
@@ -190,35 +174,21 @@
                 <table class="w-full">
                     <thead class="bg-gray-50 border-b-2 border-gray-200 ">
                         <tr>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Details</th>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Status</th>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Date</th>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Total</th>
+                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Tanggal</th>
+                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Keterangan</th>
+                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Amount</th>
+                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Payment</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
+                        @foreach($cashflow as $assets)  
                         <tr class="bg-white">
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10001</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
+                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $assets->created_at }}</td>
+                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $assets->description }}</td>
+                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $assets->amount }}</td>
+                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $assets->payment }}</td>
                         </tr>
-                        <tr class="bg-gray-50">
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10002</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">10003</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">Delivered</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">200</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -228,4 +198,29 @@
         </div>
     </section>
     <!-- Section Keuangan -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 @endsection

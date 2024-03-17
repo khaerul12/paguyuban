@@ -18,4 +18,5 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/detail/{id}', [HomeController::class,'detail'])->name('detail');
 
 Route::get('/landingpage', [HomeController::class,'landingpage'])->name('landingpage');
+Route::get('/allActivity', [HomeController::class,'allActivity'])->name('allActivity');
 

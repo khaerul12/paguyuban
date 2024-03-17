@@ -66,13 +66,13 @@
         <div class="">
             <ul class="flex gap-[2vw] font-bold items-center">
                 <li class="hover:text-green-600">
-                    <a href="#dashboard">Dashboard</a>
+                    <a href="{{ route ('landingpage')}}">Dashboard</a>
                 </li>
                 <li class="hover:text-green-600">
-                    <a href="#kegiatan">Kegiatan</a>
+                    <a href="{{ route ('landingpage')}}">Kegiatan</a>
                 </li>
                 <li class="hover:text-green-600">
-                    <a href="#saldo" class="mr-10">Saldo</a>
+                    <a href="{{ route ('landingpage')}}" class="mr-10">Saldo</a>
                 </li>
 
             </ul>
