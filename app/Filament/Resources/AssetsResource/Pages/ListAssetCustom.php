@@ -64,13 +64,9 @@ class ListAssetCustom extends Page implements HasTable
             ->actions([
                 EditAction::make('edit')
                     ->action(function (Assets $record) {
-                        // dump('admin/assets/' . $record->id . '/edit');
                         return redirect()->to('admin/assets/' . $record->id . '/edit');
                     }),
                 DeleteAction::make('delete')
-                    ->action(function (Assets $record) {
-                        return redirect()->to('admin/assets/' . $record->id . '/delete');
-                    })
             ])
             ->bulkActions([
                 BulkActionGroup::make([
