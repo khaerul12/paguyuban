@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Filament\Resources\ActivityResource\RelationManagers;
 use App\Models\Activity;
+use DateTime;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -38,19 +40,20 @@ class ActivityResource extends Resource
     protected static ?string $slug = 'daftar-kegiatan';
 
     public static function form(Form $form): Form
-    { 
+    {
         return $form
             ->schema([
                 Section::make('Add dan Edit Posting Kegiatan')->schema([
                     Section::make()->schema([
                         TextInput::make('title')->label('Judul Kegiatan')->required(),
-                        Textarea::make('body')->label('Isi Konten')->required()
-                            ->rows(6)
-                            ->cols(10),
-
+                        RichEditor::make('body')->label('Isi Konten')->required(),
                     ])->columnSpan(8),
                     Section::make()->schema([
                         FileUpload::make('image')->label('Upload Foto')->required(),
+                        DatePicker::make('create_at')->label("Tanggal konten")
+                            ->displayFormat('d-F-Y')
+                            ->native(false)
+                            ->required(),
                         Select::make('category')->label('Kategori')
                             ->options([
                                 'crypto' => 'Crypto',
@@ -58,6 +61,7 @@ class ActivityResource extends Resource
                                 'broker' => 'Broker',
                             ])
                             ->native(false)->required(),
+
                         Toggle::make('active')->label('Published')
                             ->onIcon('heroicon-m-bolt')
                             ->offIcon('heroicon-m-user')

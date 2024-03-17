@@ -14,6 +14,7 @@ class Activity extends Model
         'body',
         'image',
         'category',
-        'active'
+        'active',
+        'create_at'
     ];
 }

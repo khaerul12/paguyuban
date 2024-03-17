@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('body');
             $table->string('image');
             $table->string('category');
+            $table->date('create_at');
             $table->boolean('active')->default(false);
         });
     }

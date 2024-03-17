@@ -14,6 +14,6 @@ class Assets extends Model
         'description',
         'amount',
         'payment',
-        'category'
+        'category',
     ];
 }
