@@ -64,7 +64,7 @@ class AssetsResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('date')->label('Tanggal')->date('d-F-Y')->searchable(),
-                TextColumn::make('description'),
+                TextColumn::make('description')->searchable(),
                 TextColumn::make('amount')->money('IDR'),
                 TextColumn::make('payment')
             ])

@@ -24,6 +24,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -135,6 +136,7 @@ class BiodataResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Foto'),
+                TextColumn::make('kk')->label('No. KK')->searchable(),
                 Tables\Columns\TextColumn::make('nik')->label('NIK')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('full_name')->label('Nama')
@@ -162,6 +164,7 @@ class BiodataResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     ExportBulkAction::make()->exports([
                         ExcelExport::make()->withColumns([
+                            Column::make('kk')->heading('kk'),
                             Column::make('nik')->heading('NIK'),
                             Column::make('full_name')->heading('Nama'),
                             Column::make('image')->heading('Foto'),
@@ -171,6 +174,7 @@ class BiodataResource extends Resource
                             Column::make('religion')->heading('Agama'),
                             Column::make('status')->heading('Status'),
                             Column::make('profession')->heading('Profesi'),
+                            Column::make('note')->heading('Catatan'),
                             Column::make('numbers')->heading('Nomor HP'),
                             Column::make('email')->heading('Email'),
                             Column::make('facebook')->heading('Facebook'),

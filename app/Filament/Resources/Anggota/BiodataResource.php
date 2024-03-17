@@ -16,10 +16,14 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class BiodataResource extends Resource
 {
@@ -123,6 +127,7 @@ class BiodataResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Foto'),
+                TextColumn::make('kk')->label('No. KK')->searchable(),
                 Tables\Columns\TextColumn::make('nik')->label('NIK')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('full_name')->label('Nama')
@@ -143,6 +148,27 @@ class BiodataResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()->withColumns([
+                            Column::make('kk')->heading('kk'),
+                            Column::make('nik')->heading('NIK'),
+                            Column::make('full_name')->heading('Nama'),
+                            Column::make('image')->heading('Foto'),
+                            Column::make('birth_date')->heading('Tanggal Lahir'),
+                            Column::make('gender')->heading('Jenis Kelamin'),
+                            Column::make('blood')->heading('Golongan Darah'),
+                            Column::make('profession')->heading('Profesi'),
+                            Column::make('numbers')->heading('Nomor HP'),
+                            Column::make('address.street')->heading('Alamat'),
+                            Column::make('address.city.name')->heading('Kota'),
+                            Column::make('address.province.name')->heading('Provinsi'),
+                            Column::make('address.sub_district')->heading('Kecamatan'),
+                            Column::make('education.sd')->heading('SD'),
+                            Column::make('education.smp')->heading('SMP'),
+                            Column::make('education.sma')->heading('SMA'),
+                            Column::make('education.college')->heading('Kuliah'),
+                        ]),
+                    ]),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])

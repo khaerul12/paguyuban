@@ -14,8 +14,14 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Support\Assets\Asset;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+
 
 class ListAssetCustom extends Page implements HasTable
 {
@@ -48,7 +54,7 @@ class ListAssetCustom extends Page implements HasTable
             ->query(Assets::query())
             ->columns([
                 TextColumn::make('date')->label('Tanggal')->date('d-F-Y')->searchable(),
-                TextColumn::make('description')->label('Keterangan'),
+                TextColumn::make('description')->label('Keterangan')->searchable(),
                 TextColumn::make('amount')->money('IDR'),
                 TextColumn::make('payment')
             ])
@@ -67,7 +73,17 @@ class ListAssetCustom extends Page implements HasTable
                     })
             ])
             ->bulkActions([
-                // ...
+                BulkActionGroup::make([
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()->withColumns([
+                            Column::make('date')->heading('Tanggal'),
+                            Column::make('description')->heading('Keterangan'),
+                            Column::make('amount')->heading('Total'),
+                            Column::make('payment')->heading('Payment'), Column::make('category')->heading('Kategori'),
+                        ]),
+                    ]),
+                    DeleteBulkAction::make()
+                ])
             ])
             ->emptyStateActions([
                 CreateAction::make(),
