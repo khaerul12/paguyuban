@@ -1,4 +1,4 @@
-{{-- <nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class=" flex flex-wrap items-center justify-between mx-[3%] p-4 ">
         <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('/images/logo.svg') }}" alt="logo" class="h-10">
@@ -51,8 +51,8 @@
             </div>
         </div>
     </div>
-</nav> --}}
-<header class="bg-white shadow-md">
+</nav>
+{{-- <header class="bg-white shadow-md">
     <nav class="flex justify-between items-center">
         <div class="py-6">
             <ul class="flex items-center gap-[2vw] font-bold">
@@ -79,4 +79,4 @@
         </div>
 
     </nav>
-</header>
+</header> --}}

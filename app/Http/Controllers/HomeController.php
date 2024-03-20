@@ -36,17 +36,22 @@ class HomeController extends Controller
         // $perempuan = Biodata::where('gender','perempuan')->count();
         return view('landingpage', [
             'activities' => Activity::skip(0)->take(3)->get(),
-            'anggota' => Biodata::count(),
+            'anggota' => Biodata::where('condition','!=', null)->count(),
             'kota' => City::where('count','<>', 0)->count(),
             'allkota' => City::where('count', '!=',0) ->get(),
             'provinsi' => Province::where('count','<>', 0)->count(), 
             'cashflow' => Assets::get(),
             'totalsaldo' => number_format($total, 2, ',', '.'),
             'totalkk' => Biodata::where('head_kk','=',null) -> count(),
-            'genderlaki' => Biodata::where('gender', '=', 'laki-laki') -> count(),
-            'genderperempuan' => Biodata::where('gender', '=', 'perempuan') -> count(),
-            // 'gender' => Biodata::where('gender','=','perempuan','or','laki-laki') -> count()
+            'genderlaki' => Biodata::where('gender', '=', 'laki-laki')
+                              -> where('condition', '!=', null)
+                              -> count(),
             
+            'genderperempuan' => Biodata::where('gender', '=', 'perempuan')
+                              -> where('condition', '!=', null)
+                              -> count(),
+            // 'gender' => Biodata::where('gender','=','perempuan','or','laki-laki') -> count()
+            // 'genderlaki' => Biodata::where('gender', '=', 'laki-laki') -> count(),
             // 'gender' => Biodata::select('gender')->get()
             
         ]);
