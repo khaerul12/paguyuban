@@ -121,15 +121,16 @@
             
             <div class="2xl:flex xl:flex md:flex 2xl:justify-center xl:justify-center 2xl:gap-7 xl:gap-7 md:gap-3">
             @foreach($activities as $activities)    
-                <div class="w-full rounded overflow-hidden shadow-lg my-10">
+                <div class="2xl:max-w-sm xl:max-w-sm sm:w-full rounded overflow-hidden shadow-lg my-10">
                     <img class="w-full max-h-44 object-cover"
                         src="{{ asset('storage/'. $activities->image) }}"
                         alt="Sunset in the mountains">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">{{ $activities->title }}</div>
-                        <p class="text-gray-700 text-base">
+                        <div class="font-bold text-xl mb-2"><a href="detailActivity/{{ $activities->id }}">{{ $activities->title }}</a></div>
+                        <div class="font-bold text-xl mb-2"><a href="detailActivity/{{ $activities->id }}">{{ $activities->created_at->todatestring()}}</a></div>
+                        {{-- <p class="text-gray-700 text-base">
                             {{ $activities -> body}}
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
             @endforeach

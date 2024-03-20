@@ -10,7 +10,7 @@ use App\Models\Activity;
 use App\Models\Assets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\HtmlString;
 class HomeController extends Controller
 {
     public function index(){
@@ -66,6 +66,31 @@ class HomeController extends Controller
              'biodata' => Biodata::find($id)
          ]);
     }
+
+    public function detailActivity($id){
+        // $activity = Activity::find($id);
+        // $text = trim(strip_tags($activity->body));
+
+        // dd($text)
+        return view ('detailActivity',[
+            'detailActivity' => Activity::find($id)
+            
+        ]);
+    }
+
+
+
+    // public function getDetailActivity(string $id): View
+    // {
+        
+    //     $detailActivity = Activity::findOrFail($id);
+
+    //     dd(detailActivity);
+    //     // return view('detailActivity', compact('detailActivity'));
+    // }
+
+
+
 
     public function province(){
 //        $jsonProvinces = Storage::json('/public');

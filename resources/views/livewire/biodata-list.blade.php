@@ -38,6 +38,7 @@
                             {{ $biodata->full_name }}
                         </div>
 
+                        
                     </td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ \Carbon\Carbon::parse($biodata->birth_date)->diff(\Carbon\Carbon::now())->format('%y') }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $biodata->gender }}</td>

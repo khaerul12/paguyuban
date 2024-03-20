@@ -47,10 +47,11 @@
                     src="{{ asset('storage/'. $activities->image) }}"
                     alt="Sunset in the mountains">
                 <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{{ $activities->title }}</div>
-                    <p class="text-gray-700 text-base">
+                    <div class="font-bold text-xl mb-2"><a href="detailActivity/{{ $activities->id }}">{{ $activities->title }}</a></div>
+                    <div class="font-bold text-xl mb-2">{{ $activities->created_at->todatestring()}}</div>
+                    {{-- <p class="text-gray-700 text-base">
                         {{ $activities -> body}}
-                    </p>
+                    </p> --}}
                 </div>
             </div>   
             @endforeach

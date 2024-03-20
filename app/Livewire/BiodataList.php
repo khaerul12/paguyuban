@@ -25,12 +25,17 @@ class BiodataList extends Component
 
    #[Computed()]
     public function bios(){
-        return Biodata::where('full_name','like',"%{$this->search}%")
-            ->orWhereHas('address', function ($query){
-                $query->whereHas('city', function ($query){
-                    $query->where('name','like',"%{$this->search}%");
-                });
-            })
+        return Biodata::where([
+            ['full_name','like',"%{$this->search}%"],
+             ['head_kk','=', null],
+            ])
+            // ->orWhereHas('address', function ($query){
+            //     $query->whereHas('city', function ($query){
+            //         $query->where('name','like',"%{$this->search}%");
+            //     });
+
+            
+            // })
         ->paginate(5);
     }
 
