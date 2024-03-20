@@ -54,13 +54,13 @@ class ActivityResource extends Resource
                             ->displayFormat('d-F-Y')
                             ->native(false)
                             ->required(),
-                        Select::make('category')->label('Kategori')
-                            ->options([
-                                'crypto' => 'Crypto',
-                                'investing' => 'Investing',
-                                'broker' => 'Broker',
-                            ])
-                            ->native(false)->required(),
+                        // Select::make('category')->label('Kategori')
+                        //     ->options([
+                        //         'crypto' => 'Crypto',
+                        //         'investing' => 'Investing',
+                        //         'broker' => 'Broker',
+                        //     ])
+                        //     ->native(false)->required(),
 
                         Toggle::make('active')->label('Published')
                             ->onIcon('heroicon-m-bolt')
@@ -76,8 +76,11 @@ class ActivityResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')->label('Foto'),
-                TextColumn::make('title')->label('Judul Kegiatan'),
-                TextColumn::make('category')->label('Kategori'),
+                TextColumn::make('title')->label('Judul Kegiatan')->searchable(),
+                Tables\Columns\TextColumn::make('create_at')->label('Tanggal Publish')
+                    ->date('d-F-Y')
+                    ->searchable(),
+                // TextColumn::make('category')->label('Kategori'),
                 IconColumn::make('active')->label('Published')->boolean()
             ])
             ->filters([

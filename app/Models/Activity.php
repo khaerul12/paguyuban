@@ -13,7 +13,6 @@ class Activity extends Model
         'title',
         'body',
         'image',
-        'category',
         'active',
         'create_at'
     ];

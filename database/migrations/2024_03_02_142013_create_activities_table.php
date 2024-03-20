@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     */
+     */ 
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
@@ -16,9 +16,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('title');
-            $table->string('body');
+            $table->text('body');
             $table->string('image');
-            $table->string('category');
             $table->date('create_at');
             $table->boolean('active')->default(false);
         });
